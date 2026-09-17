@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Amputee Resources — Support Groups, Exercise Classes &amp; More</title>
+<meta name="description" content="A free directory of amputee support groups, exercise classes, podcasts, nonprofits, and community resources for amputees and their families.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Serif+4:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="site">
+  <div class="bar">
+    <div class="brand">
+      <span class="name">Amputee <strong>Resources</strong></span>
+    </div>
+    <button class="menu-toggle" aria-label="Toggle menu"><span></span><span></span><span></span></button>
+    <nav class="primary">
+      <a href="index.html" class="active">Directory</a>
+      <a href="about.html">About</a>
+      <a href="submit.html">Submit a Resource</a>
+    </nav>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <span class="tag">Free · Community-Built · Always Growing</span>
+    <h1>Find your people.</h1>
+    <p class="lede">A directory of support groups, exercise classes, podcasts, nonprofits, and communities for amputees and their families — free for everyone, always.</p>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="directory-controls">
+      <input type="search" id="search" placeholder="Search by name or keyword...">
+      <select id="category-filter">
+        <option value="">All Categories</option>
+      </select>
+    </div>
+    <div class="result-count" id="result-count"></div>
+    <div class="resource-grid" id="resource-grid"></div>
+  </div>
+</section>
+
+<section class="alt">
+  <div class="wrap section-head">
+    <h2>Know a resource we're missing?</h2>
+    <p>This directory grows with help from the community. If you know a support group, class, or nonprofit that should be here, let us know.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="submit.html">Submit a Resource</a>
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <span>© 2026 Amputee Resources</span>
+    <span><a href="privacy.html">Privacy Policy</a> · A public service directory — not a medical provider</span>
+  </div>
+</footer>
+
+<script src="app.js"></script>
+</body>
+</html>
