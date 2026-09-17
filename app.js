@@ -19,12 +19,26 @@ function cardHTML(r){
     </div>`;
 }
 
-function render(list, container){
+function render(list, container, showHeaders){
   if(!list.length){
     container.innerHTML = '<div class="no-results">No resources match your search. Try a different term or category.</div>';
     return;
   }
-  container.innerHTML = list.map(cardHTML).join('');
+  if(!showHeaders){
+    container.innerHTML = `<div class="resource-grid">${list.map(cardHTML).join('')}</div>`;
+    return;
+  }
+  const groups = [];
+  list.forEach(r => {
+    const cat = r.Category || 'Other';
+    let group = groups.find(g => g.cat === cat);
+    if(!group){ group = {cat, items: []}; groups.push(group); }
+    group.items.push(r);
+  });
+  container.innerHTML = groups.map(g => `
+    <h2 class="category-heading">${g.cat}</h2>
+    <div class="resource-grid">${g.items.map(cardHTML).join('')}</div>
+  `).join('');
 }
 
 (async function init(){
@@ -44,6 +58,17 @@ function render(list, container){
     categorySelect.appendChild(opt);
   });
 
+  function sortByCategoryThenName(list){
+    return [...list].sort((a, b) => {
+      const catA = (a.Category || '').toLowerCase();
+      const catB = (b.Category || '').toLowerCase();
+      if (catA !== catB) return catA.localeCompare(catB);
+      const nameA = (a.Name || '').toLowerCase();
+      const nameB = (b.Name || '').toLowerCase();
+      return nameA.localeCompare(nameB);
+    });
+  }
+
   function applyFilters(){
     const q = search.value.trim().toLowerCase();
     const cat = categorySelect.value;
@@ -52,8 +77,9 @@ function render(list, container){
       const matchesQ = !q || (r.Name||'').toLowerCase().includes(q) || (r.Description||'').toLowerCase().includes(q);
       return matchesCat && matchesQ;
     });
-    render(filtered, grid);
-    countEl.textContent = `${filtered.length} resource${filtered.length===1?'':'s'}`;
+    const sorted = sortByCategoryThenName(filtered);
+    render(sorted, grid, !cat);
+    countEl.textContent = `${sorted.length} resource${sorted.length===1?'':'s'}`;
   }
 
   search.addEventListener('input', applyFilters);

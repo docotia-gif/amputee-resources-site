@@ -144,6 +144,13 @@ section.alt{background:var(--paper-dim);border-top:1px solid var(--line);border-
 }
 .result-count{font-family:'Inter',sans-serif;font-size:.82rem;color:var(--gray);margin-bottom:20px;}
 
+.category-heading{
+  font-size:1.5rem;margin:36px 0 16px;
+  padding-bottom:8px;border-bottom:1px solid var(--line);
+  color:var(--teal);
+}
+.category-heading:first-child{margin-top:0;}
+
 /* ---- Resource cards ---- */
 .resource-grid{
   display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;
