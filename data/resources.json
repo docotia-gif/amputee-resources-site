@@ -2,7 +2,7 @@
   {
     "Name": "Balanced Amputees",
     "Category": "Zoom Meeting Group",
-    "Description": "Must register \u2014 Leslie Green (Hangar Educator) will contact you before sharing the link. Several groups meet various days and times.",
+    "Description": "Must register — Leslie Green (Hangar Educator) will contact you before sharing the link. Several groups meet various days and times.",
     "URL": "https://www.balancedamputees.com",
     "Meeting Day": "Various",
     "Meeting Time": "Various",
@@ -342,7 +342,7 @@
   {
     "Name": "Psyonic",
     "Category": "Website",
-    "Description": "Aadeel Akhtar PhD \u2014 CEO and Founder. Advanced affordable prosthetic solutions. Ability Funds available.",
+    "Description": "Aadeel Akhtar PhD — CEO and Founder. Advanced affordable prosthetic solutions. Ability Funds available.",
     "URL": "https://www.psyonic.io",
     "Meeting Day": "",
     "Meeting Time": "",
@@ -528,6 +528,16 @@
     "Meeting Time": "",
     "Zoom ID": "",
     "Notes": ""
+  },
+  {
+    "Name": "Amputee BMI Calculator",
+    "Category": "Website",
+    "Description": "Free online calculator for adjusted body mass index — enter height and weight plus your amputation level and side to get your adjusted BMI.",
+    "URL": "https://amputeebmi.com/",
+    "Meeting Day": "",
+    "Meeting Time": "",
+    "Zoom ID": "",
+    "Notes": "Free web calculator"
   },
   {
     "Name": "Amputees Life After Limb Loss",
