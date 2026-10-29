@@ -176,6 +176,8 @@
 (function () {
   var form = document.getElementById('submitForm');
   var status = document.getElementById('status');
+  // Paste the Apps Script Web app URL here (see apps-script/Code.gs).
+  var SUBMIT_ENDPOINT = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
@@ -184,21 +186,23 @@
 
     var data = new FormData(form);
 
-    fetch('/api/submit', {
+    // Apps Script web apps do not send CORS headers, so we POST as text/plain
+    // (no preflight) and read the response as opaque: success = request delivered.
+    var payload = JSON.stringify(Object.fromEntries(data));
+    if (SUBMIT_ENDPOINT.indexOf('PASTE_') === 0) {
+      status.className = 'status error';
+      status.innerHTML = '<p>Form is not connected yet. Please email submissions@amputeeresources.com.</p>';
+      return;
+    }
+    fetch(SUBMIT_ENDPOINT, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(Object.fromEntries(new FormData(form))),
-    }).then(function (res) {
-      return res.json().then(function (j) { return { ok: res.ok, body: j }; });
-    }).then(function (result) {
-      if (result.ok) {
-        status.className = 'status success';
-        status.innerHTML = '<p>Thanks &mdash; got it! We&rsquo;ll review this and add it to the directory when it&rsquo;s approved.</p>';
-        form.reset();
-      } else {
-        status.className = 'status error';
-        status.innerHTML = '<p>Something went wrong: ' + (result.body.error || 'unknown error') + '</p>';
-      }
+      mode: 'no-cors',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+      body: payload,
+    }).then(function () {
+      status.className = 'status success';
+      status.innerHTML = '<p>Thanks &mdash; got it! We&rsquo;ll review this and add it to the directory when it&rsquo;s approved.</p>';
+      form.reset();
     }).catch(function () {
       status.className = 'status error';
       status.innerHTML = '<p>Couldn&rsquo;t reach the server. Please try again, or email us at submissions@amputeeresources.com.</p>';
