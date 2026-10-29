@@ -50,19 +50,15 @@ export async function onRequestPost(context) {
     }
 
     // --- 2. append the row to the Google Sheet ---
+    // values:append adds a new row after the last used row. (batchUpdate to a
+    // fixed range like A2:G2 would overwrite the previous submission each time.)
     const payload = {
-      valueInputOption: "RAW",
-      data: [
-        {
-          range: "Submissions!A2:G2",
-          values: [
-            [new Date().toISOString(), name, category, description, url, email, notes],
-          ],
-        },
+      values: [
+        [new Date().toISOString(), name, category, resname, description, url, email, notes],
       ],
     };
     const sheetRes = await fetch(
-      `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values:batchUpdate`,
+      `https://sheets.googleapis.com/v4/spreadsheets/${SPREADSHEET_ID}/values/${encodeURIComponent("Submissions!A:H")}:append?valueInputOption=RAW&insertDataOption=INSERT_ROWS`,
       {
         method: "POST",
         headers: {

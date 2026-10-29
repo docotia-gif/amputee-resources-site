@@ -7,6 +7,80 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Source+Serif+4:wght@400;500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<style>
+  .submission-card {
+    max-width: 680px;
+    margin: 0 auto;
+    background: #fcfcfd;
+    border: 1px solid #e6e2da;
+    border-radius: 10px;
+    padding: 28px 32px;
+  }
+  .submission-card h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    margin: 0 0 6px;
+  }
+  .submission-card .lede {
+    color: var(--ink-soft);
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 0 22px;
+  }
+  .field { margin-bottom: 18px; }
+  .field label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 6px;
+  }
+  .field .hint { font-size: 12px; color: var(--ink-soft); margin-left: 4px; }
+  .field input, .field select, .field textarea {
+    width: 100%;
+    padding: 11px 12px;
+    font-size: 14px;
+    font-family: inherit;
+    color: var(--ink);
+    background: #ffffff;
+    border: 1px solid #d9d3c8;
+    border-radius: 6px;
+    box-sizing: border-box;
+    transition: border-color 0.15s;
+  }
+  .field input:focus, .field select:focus, .field textarea:focus {
+    outline: none;
+    border-color: #b99a6a;
+  }
+  .field textarea { resize: vertical; min-height: 84px; }
+  .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .submission-card .actions { display: flex; gap: 12px; margin-top: 22px; flex-wrap: wrap; }
+  .submission-card .actions .btn { flex: 1; min-width: 140px; }
+  .status {
+    margin-top: 16px;
+    padding: 12px 14px;
+    border-radius: 6px;
+    font-size: 14px;
+    display: none;
+  }
+  .status.success { display: block; background: #eef7ee; border: 1px solid #cfe6cf; color: #2b6b3a; }
+  .status.error { display: block; background: #f9efeb; border: 1px solid #f0c8bd; color: #8a3a2b; }
+  .privacy-note {
+    margin-top: 18px;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+  }
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 18px;
+    font-size: 14px;
+    color: var(--ink-soft);
+    text-decoration: underline;
+  }
+</style>
 </head>
 <body>
 
@@ -28,18 +102,67 @@
   <div class="wrap">
     <span class="tag">Help Us Grow</span>
     <h1>Submit a resource.</h1>
-    <p class="lede">Know a support group, class, podcast, or nonprofit that should be listed here? Tell us about it.</p>
+    <p class="lede">Know a support group, class, podcast, or nonprofit that should be listed here? Tell us about it and we'll review it for the directory.</p>
   </div>
 </section>
 
-<section>
-  <div class="wrap" style="max-width:680px;margin:0 auto;text-align:center;">
-    <!-- SUBMISSION_FORM_EMBED -->
-    <p class="sans" style="color:var(--ink-soft);">Our submission form is coming very soon. In the meantime, email us your suggestion and we'll add it by hand.</p>
-    <div class="cta-row">
-      <a class="btn primary" href="mailto:submissions@amputeeresources.com">Email a Resource</a>
+<section class="submission-card">
+  <a class="back-link" href="index.html">&larr; Back to the directory</a>
+  <h2>Submission form</h2>
+
+  <form id="submitForm" novalidate>
+    <div class="field">
+      <label for="name">Your name</label>
+      <input id="name" name="name" type="text" placeholder="Optional — we'd like to thank you by name">
     </div>
-  </div>
+
+    <div class="row2">
+      <div class="field">
+        <label for="email">Email</label>
+        <input id="email" name="email" type="email" placeholder="So we can reach you about the listing">
+      </div>
+      <div class="field">
+        <label for="category">Category</label>
+        <select id="category" name="category">
+          <option value="Support Group">Support Group</option>
+          <option value="Exercise / Class">Exercise / Class</option>
+          <option value="Podcast">Podcast</option>
+          <option value="Nonprofit">Nonprofit</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="field">
+      <label for="resname">Resource name</label>
+      <input id="resname" name="resname" type="text" placeholder="e.g. Balanced Amputees">
+    </div>
+
+    <div class="field">
+      <label for="url">Website (optional)</label>
+      <input id="url" name="url" type="url" placeholder="https://example.com">
+    </div>
+
+    <div class="field">
+      <label for="description">Description of the resource <span class="hint">(2–4 sentences)</span></label>
+      <textarea id="description" name="description" placeholder="What is this? Who can join? Do they need to register?"></textarea>
+    </div>
+
+    <div class="field">
+      <label for="notes">Notes <span class="hint">(optional)</span></label>
+      <textarea id="notes" name="notes" placeholder="Anything else we should know (meeting times, registration link, etc.)"></textarea>
+    </div>
+
+    <div class="status" id="status"></div>
+
+    <div class="actions">
+      <button type="submit" class="btn primary">Submit resource</button>
+    </div>
+  </form>
+
+  <p class="privacy-note">
+    Thanks for helping grow the directory. Submissions are reviewed by the admin team before they're added, so we may email you if we have questions. We won't share your information, and nothing here is published until it's approved.
+  </p>
 </section>
 
 <footer class="site">
@@ -49,6 +172,39 @@
   </div>
 </footer>
 
-<script src="app.js"></script>
+<script>
+(function () {
+  var form = document.getElementById('submitForm');
+  var status = document.getElementById('status');
+
+  form.addEventListener('submit', function (e) {
+    e.preventDefault();
+    status.className = 'status';
+    status.innerHTML = '<p>Sending&hellip;</p>';
+
+    var data = new FormData(form);
+
+    fetch('/api/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(Object.fromEntries(new FormData(form))),
+    }).then(function (res) {
+      return res.json().then(function (j) { return { ok: res.ok, body: j }; });
+    }).then(function (result) {
+      if (result.ok) {
+        status.className = 'status success';
+        status.innerHTML = '<p>Thanks &mdash; got it! We&rsquo;ll review this and add it to the directory when it&rsquo;s approved.</p>';
+        form.reset();
+      } else {
+        status.className = 'status error';
+        status.innerHTML = '<p>Something went wrong: ' + (result.body.error || 'unknown error') + '</p>';
+      }
+    }).catch(function () {
+      status.className = 'status error';
+      status.innerHTML = '<p>Couldn&rsquo;t reach the server. Please try again, or email us at submissions@amputeeresources.com.</p>';
+    });
+  });
+})();
+</script>
 </body>
 </html>
