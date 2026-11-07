@@ -114,6 +114,7 @@ nav.primary a.active{color:var(--teal);border-bottom:1px solid var(--teal);paddi
   color:var(--ink-soft);
   max-width:640px;margin:0 auto;
 }
+.hero p.lede.disclaimer{margin-top:1.5rem;}
 .hero .tag{
   font-family:'Inter',sans-serif;
   font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;
